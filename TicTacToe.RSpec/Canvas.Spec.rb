@@ -27,3 +27,82 @@ describe "When setting up a  canvas" do
     end
   end
 end
+
+describe "When setting up a canvas with values to verify the rows" do
+  before :each do
+    @canvas = TicTacToe::Canvas.new
+    @canvas.Squares[0].SetToX
+    @canvas.Squares[1].SetToO
+    @canvas.Squares[3].SetToO
+    @canvas.Squares[5].SetToX
+    @canvas.Squares[7].SetToX
+    @canvas.Squares[8].SetToO
+  end
+  describe "When verifying row 1" do
+    it "should be a row object" do
+      @canvas.Row1.should be_instance_of(TicTacToe::Row)
+    end
+    
+    it "should have the values of canvas items 0, 1, and 2" do
+      @canvas.Row1.Cells[0].should == @canvas.Squares[0]
+      @canvas.Row1.Cells[1].should == @canvas.Squares[1]
+      @canvas.Row1.Cells[2].should == @canvas.Squares[2]
+    end
+  end
+  
+  describe "When verifying row2" do
+    it "should have the valuse of canvas items 3, 4, 5" do
+      @canvas.Row2.Cells[0].should == @canvas.Squares[3]
+      @canvas.Row2.Cells[1].should == @canvas.Squares[4]
+      @canvas.Row2.Cells[2].should == @canvas.Squares[5]      
+    end
+  end
+  
+  describe "When verifying row3" do
+    it "should have the valuse of canvas items 3, 4, 5" do
+      @canvas.Row3.Cells[0].should == @canvas.Squares[6]
+      @canvas.Row3.Cells[1].should == @canvas.Squares[7]
+      @canvas.Row3.Cells[2].should == @canvas.Squares[8]      
+    end
+  end
+  
+  describe "When verifying column1" do
+    it "should have the values of canvas items 0, 3, 6" do
+      @canvas.Column1.Cells[0].should == @canvas.Squares[0]
+      @canvas.Column1.Cells[1].should == @canvas.Squares[3]
+      @canvas.Column1.Cells[2].should == @canvas.Squares[6]
+    end
+  end
+  
+  describe "When verifying column2" do
+    it "should have the values of canvas items 0, 3, 6" do
+      @canvas.Column2.Cells[0].should == @canvas.Squares[1]
+      @canvas.Column2.Cells[1].should == @canvas.Squares[4]
+      @canvas.Column2.Cells[2].should == @canvas.Squares[7]
+    end
+  end
+  
+  describe "When verifying column3" do
+    it "should have the values of canvas items 0, 3, 6" do
+      @canvas.Column3.Cells[0].should == @canvas.Squares[2]
+      @canvas.Column3.Cells[1].should == @canvas.Squares[5]
+      @canvas.Column3.Cells[2].should == @canvas.Squares[8]
+    end
+  end
+  
+  describe "When verifying diagonal1" do
+    it "should have the values of canvas items 0, 4, 8" do
+      @canvas.Diagonal1.Cells[0].should == @canvas.Squares[0]
+      @canvas.Diagonal1.Cells[1].should == @canvas.Squares[4]
+      @canvas.Diagonal1.Cells[2].should == @canvas.Squares[8]
+    end
+  end
+  
+  describe "When verifying diagonal2" do
+    it "should have the values of canvas items 2, 4, 6" do
+      @canvas.Diagonal2.Cells[0].should == @canvas.Squares[2]
+      @canvas.Diagonal2.Cells[1].should == @canvas.Squares[4]
+      @canvas.Diagonal2.Cells[2].should == @canvas.Squares[6]
+    end
+  end
+end
