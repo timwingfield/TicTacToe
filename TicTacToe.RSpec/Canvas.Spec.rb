@@ -106,3 +106,39 @@ describe "When setting up a canvas with values to verify the rows" do
     end
   end
 end
+
+describe "When checking for a game winner" do
+  #0, 1, 2
+  #3, 4, 5
+  #6, 7, 8
+  before :each do
+    @canvas = TicTacToe::Canvas.new
+  end
+  
+  describe "When all spaces are empty" do
+    it "should return game not over" do
+      @canvas.IsGameOver.should be_false
+    end
+    
+    it "should return no winner" do
+      @canvas.Winner.should == "Nobody"
+    end
+  end
+  
+  describe "When three non consecutive spaces are filled" do
+    before :each do
+      @canvas.Squares[1].SetToX
+      @canvas.Squares[4].SetToO
+      @canvas.Squares[8].SetToX
+    end
+    
+    it "should return game not over" do
+      @canvas.IsGameOver.should be_false
+    end
+    
+    it "should return no winner" do
+      @canvas.Winner.should == "Nobody"
+    end
+  end
+  
+end
