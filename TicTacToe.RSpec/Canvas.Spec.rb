@@ -120,8 +120,20 @@ describe "When checking for a game winner" do
       @canvas.IsGameOver.should be_false
     end
     
-    it "should return no winner" do
-      @canvas.Winner.should == "Nobody"
+    it "should not have a winner" do
+      @canvas.HasAWinner.should be_false
+    end
+  end
+  
+  describe "When all spaces are filled" do
+    before :each do
+      @canvas.Squares.each do |square|
+        square.SetToX
+      end
+    end
+    
+    it "should return the game is over" do
+      @canvas.IsGameOver.should be_true
     end
   end
   
@@ -136,8 +148,62 @@ describe "When checking for a game winner" do
       @canvas.IsGameOver.should be_false
     end
     
-    it "should return no winner" do
-      @canvas.Winner.should == "Nobody"
+    it "should not have a winner" do
+      @canvas.HasAWinner.should be_false
+    end
+  end
+  
+  describe "When row1 contains three Xs" do
+    before :each do
+      @canvas.Squares[0].SetToX
+      @canvas.Squares[1].SetToX
+      @canvas.Squares[2].SetToX
+    end
+    
+    it "should return game is over" do
+      @canvas.IsGameOver.should be_true
+    end
+    
+    it "should have a winner" do
+      @canvas.HasAWinner.should be_true
+    end
+  end
+  
+  describe "When diagonal1 contains three Os" do
+    before :each do
+      @canvas.Squares[0].SetToO
+      @canvas.Squares[4].SetToO
+      @canvas.Squares[8].SetToO
+    end
+    
+    it "should return game is over" do
+      @canvas.IsGameOver.should be_true
+    end
+    
+    it "should have a winner" do
+      @canvas.HasAWinner.should be_true
+    end
+  end
+  
+  describe "When all squares are filled and there is no winner" do
+    before :each do
+      @canvas.Squares[0].SetToX
+      @canvas.Squares[1].SetToO
+      @canvas.Squares[2].SetToX
+      @canvas.Squares[3].SetToX
+      @canvas.Squares[4].SetToO
+      @canvas.Squares[5].SetToX
+      @canvas.Squares[6].SetToO
+      @canvas.Squares[7].SetToX
+      @canvas.Squares[8].SetToO
+    end
+    
+    it "should return the game is over" do
+      @canvas.IsGameOver.should be_true
+    end
+    
+    it "should not have a winner" do
+      @canvas.HasAWinner.should be_false
     end
   end
   
